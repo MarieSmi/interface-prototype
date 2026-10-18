@@ -486,7 +486,7 @@
       close.addEventListener('click', closeSubmenu);
       float.append(close);
     }
-    const edit = el('button', 'float-btn', '<span class="ico"></span>');
+    const edit = el('button', 'float-btn float-btn--edit', '<span class="ico"></span>');
     edit.type = 'button';
     edit.setAttribute('aria-label', 'Редактировать подменю');
     edit.addEventListener('click', () => openEditor(sec.id));
@@ -1251,6 +1251,7 @@
   }
 
   function openEditor(id) {
+    if (stage.dataset.scenario === 'editor-user') return; // пользователь подменю не настраивает
     const sec = SECTIONS.find((s) => s.id === id);
     closeSubmenu();
     closeOtherWindows();

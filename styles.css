@@ -520,7 +520,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 .stage[data-scenario="editor-user"] .accordion:not(.is-narrow) .acc-header__row .acc-bird:hover { background: none; }
 .stage[data-scenario="editor-user"] .ae-brand:hover { border-color: transparent; }
 /* «Пользователь» не добавляет страницы и не настраивает подменю: нет «+» в шапке аккордеона и команд пункта по ховеру */
-.stage[data-scenario="editor-user"] :is(.acc-plus, .acc-cmds) { display: none; }
+.stage[data-scenario="editor-user"] :is(.acc-plus, .acc-cmds, .float-btn--edit) { display: none; } /* и карандаша у подменю */
 
 /* ---------- Середина: общая шапка страницы ---------- */
 .page { display: flex; flex-direction: column; height: 100%; padding-left: 8px; box-sizing: border-box; font-family: "Inter", sans-serif; color: var(--c-text-strong); }
