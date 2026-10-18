@@ -153,21 +153,14 @@
     // disabled — сценарий пока не сделан
     scenarios: [
       { id: 'demo', title: 'Общее демо' },
-      // «Точка захода в редактор» пока скрыта (сценарии готовы) — вернуть: убрать hidden
-      { group: 'Точка захода в редактор', hidden: true, items: [
+      { group: 'Точка захода в редактор', items: [
         { id: 'editor-inside', title: 'Админка (Inside)' },
         { id: 'editor-account', title: 'Аккаунт' },
-        { id: 'editor-user', title: 'Пользователь', disabled: true, variants: [{ id: 'main', title: 'С главной' }, { id: 'settings', title: 'Из настроек' }] },
-      ] },
-      // «Добавление вкладки» пока скрыто (сценарии готовы) — вернуть: убрать hidden
-      { group: 'Добавление вкладки', hidden: true, items: [
-        { id: 'tab-toolbar', title: 'Из тулбара', variants: [{ id: 'plus', title: 'Плюс в тулбаре' }, { id: 'link', title: '+вкладка' }, { id: 'chip', title: 'Чипса в тулбаре' }] },
-        { id: 'tab-dash-head', title: 'Из шапки дашборда', variants: [
-          { id: 'no-filters', title: 'Без фильтров' }, { id: 'filters', title: 'С фильтрами' }, { id: 'chip', title: 'По чипсе' }, { id: 'chip-filters', title: 'По чипсе с фильтрами' },
-        ] },
+        { id: 'editor-user', title: 'Пользователь', variants: [{ id: 'main', title: 'С главной' }, { id: 'settings', title: 'Из настроек' }] },
       ] },
     ],
-    // сценарии «Аккордеон» и «Подменю» — в отдельном прототипе github.com/MarieSmi/accordion-setup
+    // сценарии «Аккордеон» и «Подменю» — в отдельном прототипе github.com/MarieSmi/accordion-setup;
+    // сценарии «Добавление вкладки» (tab-toolbar, tab-dash-head) убраны с панели, код остался
     links: [
       { title: 'Макет', href: 'https://www.figma.com/proto/xMQ3ZEN4AUINgwjVoxR8hS/%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%84%D0%B5%D0%B9%D1%81%D0%B0-%D0%B2-%D0%BA%D0%BE%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D0%BE%D1%80%D0%B5?node-id=16219-76404&p=f&t=RLyxreNsun3BEvZg-0&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=16219%3A76404&page-id=15961%3A68013&hide-ui=1' },
       { title: 'Настройка аккордеона', href: 'https://www.figma.com/proto/9eLwMJLQCwT0xHKviN2j1P/%D0%9D%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%B0%D0%BA%D0%BA%D0%BE%D1%80%D0%B4%D0%B5%D0%BE%D0%BD%D0%B0-%D0%B2-%D0%BA%D0%BE%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D0%BE%D1%80%D0%B5?node-id=15961-69245&t=s00ww53K0w0788Dp-0&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=15961%3A69245&page-id=15961%3A68013&hide-ui=1' },
@@ -182,7 +175,7 @@
     value: { scenario: stage.dataset.scenario },
     onScale: (s) => { scale = s; },
     onChange: ({ scenario, variant }) => {
-      setMobile(false); // мобильный вид — только в «Общем демо»
+      setMobile(false); // каждый сценарий начинается с десктопа
       stage.dataset.scenario = scenario;
       if (variant) stage.dataset.variant = variant;
       else delete stage.dataset.variant;
@@ -201,7 +194,7 @@
       resetTabs(scenario.startsWith('tab-'));
       removeAddedSections(); // пункты, добавленные в «Настройке аккордеона», живут только в этом сценарии
       resetHistory(); // смена сценария — не правка: история начинается заново
-      setInside(scenario);
+      setInside(variant ? `${scenario}:${variant}` : scenario);
       setEditorOnly();
     },
   });
@@ -676,7 +669,7 @@
   }
 
   // ---------- Мобильный вид ----------
-  // Кнопка «мобилка» в шапке (только «Общее демо»): вместо аккордеона и контента — экран 400 с картинкой страницы
+  // Кнопка «мобилка» в шапке: вместо аккордеона и контента — экран 400 с картинкой страницы
   // (Главная / скелетон раздела) и ННП внизу. ННП: «Меню», «Главная», затем разделы аккордеона по порядку;
   // клик по разделу открывает его страницу. «Меню» открывает аккордеон поверх экрана: закрывается по затемнению,
   // повторному «Меню» и выбору страницы; пункты мобильного аккордеона без кликов (только ховер / нажатие).
@@ -720,7 +713,6 @@
   }
 
   function setMobile(on) {
-    if (on && stage.dataset.scenario !== 'demo') return;
     if (on === isMobile()) return;
     closeOtherWindows();
     closePopups();
@@ -968,7 +960,9 @@
 
   registerWindow('logo', { win: logoWin, btn: $('#logoBtn'), onOpen: renderLogo, onClose: closeIconMenu });
   // Птичка в шапке аккордеона открывает то же окно, что кнопка «Логотип» в шапке конструктора.
-  $('.acc-bird').addEventListener('click', (e) => isNarrow() || setWindow(openWin === 'logo' && openFrom ? null : 'logo', e.currentTarget));
+  // «Пользователь» логотип не настраивает: окна нет ни из шапки конструктора, ни из аккордеона, ни из его редактора.
+  const logoOn = () => stage.dataset.scenario !== 'editor-user';
+  $('.acc-bird').addEventListener('click', (e) => isNarrow() || !logoOn() || setWindow(openWin === 'logo' && openFrom ? null : 'logo', e.currentTarget));
   logoReset.addEventListener('click', () => setLogo(null));
   $('#lwBird').addEventListener('click', (e) => openIconMenu(e.currentTarget));
   $('#iconMenuClose').addEventListener('click', closeIconMenu);
@@ -1117,13 +1111,13 @@
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !rpMoreMenu.hidden) closeRpMore(); });
 
   // ---------- Меню «⋮» пункта аккордеона (Figma xMQ3ZEN4AUINgwjVoxR8hS 19401:31603) ----------
-  // В «Общем демо» и «Аккордеон → Настройка аккордеона». Крестик меню — ровно поверх «⋮» (крестик: right −14, top 8, 28×28).
+  // Во всех сценариях конструктора. Крестик меню — ровно поверх «⋮» (крестик: right −14, top 8, 28×28).
   // «Настроить подменю» — редактор подменю; «Переименовать» — каретка в названии на месте; «Переместить» — только ховер
   // (подменю «Вверх / Вниз / В другой раздел» без действий); «Удалить» — пункт уходит (отмена в шапке возвращает).
   // У второй строки (выбранный пункт подменю) то же меню, действия — с этим пунктом подменю.
   const accMore = $('#accMore');
   let am = null; // { id, sub, li }
-  const accMoreOn = () => ['demo', 'acc-setup'].includes(stage.dataset.scenario);
+  const accMoreOn = () => itemSettingsOn();
   function toggleAccMore(id, cmd, sub) {
     if (am && am.id === id && am.sub === sub) { closeAccMore(); return; }
     closeAccMore();
@@ -1401,7 +1395,7 @@
     smeIcon.innerHTML = editorIconHTML(ed.sec, draft.icon);
     smeCard.innerHTML = '';
     smeCard.classList.toggle('is-multi', draft.cols.length > 1);
-    // правки реестра (двухколоночный, плюсы с меню «+», ховер только у виджета) — только в «Аккордеоне и подменю»
+    // правки реестра (двухколоночный, плюсы с меню «+», ховер только у виджета)
     const registry = itemSettingsOn();
     smeCard.classList.toggle('is-registry', registry);
     // в реестре плюсы сверху и снизу выделенного виджета открывают меню «+», выбранная страница встаёт на место плюса
@@ -1760,6 +1754,12 @@
 
   tabsW.addEventListener('mousedown', (e) => {
     if (e.target.closest('.is-editing, .tabs-w__bar')) return;
+    // «Пользователь» (и в приложении, и в конструкторе): вкладки только переключаются
+    if (stage.dataset.scenario === 'editor-user') {
+      const tab = e.target.closest('.pg-tab');
+      if (tab && e.button === 0) setActiveTab(+tab.dataset.id);
+      return;
+    }
     // второй клик по активной вкладке (виджет уже выделен) — переименование на месте
     const wasSelected = tabsW.classList.contains('is-selected');
     selectTabs(true);
@@ -2284,9 +2284,9 @@
     commit(draft);
   }
 
-  // Сценарий «Аккордеон → Настройка аккордеона»: страница из меню «+» шапки аккордеона становится пунктом в конце аккордеона
+  // Во всех сценариях конструктора: страница из меню «+» шапки аккордеона становится пунктом в конце аккордеона
   // и открывается её страница (скелетон). Пустого подменю нет: в нём сразу заголовок — название пункта. Редактор подменю — по ✎ пункта, как у остальных разделов.
-  const accAddItems = () => stage.dataset.scenario === 'acc-setup';
+  const accAddItems = () => itemSettingsOn();
   const ADDED_ICON = ICON_GROUPS[0].icons[0]; // иконка нового пункта — первая из выбора иконок (меняется в редакторе)
   let addedCount = 0;
   function addAccItem(title) {
@@ -2657,7 +2657,7 @@
   shield.addEventListener('mousedown', () => { if (!ae) return; stopAeEdit(true); aeSelect(null); });
   $('.sme-head', accEditor).addEventListener('mousedown', (e) => startDrag(e, accEditor));
   // виджет шапки: клик — окно «Логотип» (повторный — закрывает)
-  $('#aeBrand').addEventListener('click', (e) => setWindow(openWin === 'logo' && openFrom ? null : 'logo', e.currentTarget, { right: $('.ae-card', accEditor) }));
+  $('#aeBrand').addEventListener('click', (e) => logoOn() && setWindow(openWin === 'logo' && openFrom ? null : 'logo', e.currentTarget, { right: $('.ae-card', accEditor) }));
 
   // в узком аккордеоне (снизу только карандаш) сначала разворачиваем его, редактор — по окончании анимации
   accGear.addEventListener('click', () => {
@@ -2689,8 +2689,8 @@
   const IW_CMDS = [['none', 'Не выбрано'], ['count', 'Счетчик'], ['panel', 'Открытие панели'], ['add', 'Добавление']];
   const IW_SHOWS = [['both', 'Новые и общие события'], ['new', 'Только новые события'], ['total', 'Общее количество событий']];
   const IW_DEMO = { accent: '3', count: '12' }; // демо-цифры счётчика, если своих у пункта нет
-  // окно — в «Настройке аккордеона» и в «Подменю → Редактор»
-  function itemSettingsOn() { return ['acc-setup', 'submenu-editor'].includes(stage.dataset.scenario); }
+  // окно и правки реестра — во всех сценариях, кроме скрытых «Добавления вкладки»
+  function itemSettingsOn() { return !stage.dataset.scenario.startsWith('tab-'); }
 
   // Элемент справа пункта ⇄ настройки окна
   function iwFromRight(r) {
@@ -3657,28 +3657,56 @@
   document.addEventListener('keyup', (e) => { if (e.key === 'Enter' || e.key === 'Escape' || e.key === 'Delete') later(); }, true);
   document.addEventListener('input', () => { clearTimeout(inputTimer); inputTimer = setTimeout(record, INPUT_PAUSE); }, true);
 
-  // ---------- Точка захода в редактор: «Админка (Inside)» и «Аккаунт» ----------
-  // Экран приложения (Figma xMQ3ZEN4AUINgwjVoxR8hS: админка 18428:12935, аккаунт 18637:73187) поверх конструктора.
-  // Превью на обоих экранах красится токенами темы со сцены; логотип и надпись — как в аккордеоне.
-  // Клик по превью админки или «Настроить» аккаунта открывает конструктор (редактор), ✓ шапки — сохранить и вернуться, ✕ — вернуться; если были правки,
+  // ---------- Точка захода в редактор: «Админка (Inside)», «Аккаунт», «Пользователь» ----------
+  // Экран приложения (Figma xMQ3ZEN4AUINgwjVoxR8hS: админка 18428:12935, панель «Online» 19470:56425, аккаунт 19523:72338,
+  // пользователь из настроек 19523:73629) поверх конструктора; превью на экранах красится токенами темы со сцены, логотип и надпись —
+  // как в аккордеоне. «С главной» (18398:16347) — сама сцена как приложение (.stage.is-runtime), вход — «4 квадратика».
+  // «Настроить» открывает конструктор (редактор), ✓ шапки — сохранить и вернуться, ✕ — вернуться; если были правки,
   // сначала «Сохранить изменения?»: «Да» — как ✓, «Нет» — откатить правки этого захода, «Отмена» — остаться в редакторе.
-  const ENTRIES = { 'editor-inside': $('#inside'), 'editor-account': $('#account') };
-  let entry = null;      // экран текущего сценария захода в редактор; null — другой сценарий
+  const screenEntry = (sec) => ({
+    trigger: sec.querySelector('.ins-setup'),
+    show() {
+      for (const b of sec.querySelectorAll('.ipv__bird')) b.innerHTML = logoHTML();
+      for (const l of sec.querySelectorAll('.ipv__logo')) l.innerHTML = $('#goHome').innerHTML;
+      // вид аккордеона со сцены: узкий (с названиями / без названий / панель) — в превью тоже узкий
+      for (const v of sec.querySelectorAll('.ipv')) {
+        v.classList.toggle('is-narrow', isNarrow());
+        v.classList.toggle('is-labels', isNarrow() && settings.narrowView === 'labels');
+      }
+      sec.hidden = false;
+    },
+    hide() { sec.hidden = true; },
+  });
+  const runtimeEntry = {
+    trigger: $('#infApps'),
+    show() {
+      closePopups();
+      selectTabs(false);
+      if (state.page.section) { state.page = { section: null, item: null }; updatePage(); renderAccordion(); } // дашборд — Главная
+      stage.classList.add('is-runtime');
+    },
+    hide() { stage.classList.remove('is-runtime'); },
+  };
+  // ключ — сценарий или «сценарий:вилка»
+  const ENTRIES = {
+    'editor-inside': screenEntry($('#inside')), 'editor-account': screenEntry($('#account')),
+    'editor-user:settings': screenEntry($('#userSettings')), 'editor-user:main': runtimeEntry,
+  };
+  let entry = null;      // точка захода текущего сценария; null — другой сценарий
   let insideSnap = null; // снимок при входе в редактор с экрана; null — редактор открыт не с экрана
   let insideAsk = false; // подтверждение открыто ✕ шапки в сценарии захода
 
   function showInside() {
+    setMobile(false); // экран приложения и «С главной» — десктопные; мобильный вид — только в конструкторе
     closeOtherWindows();
     closeSubmenu();
-    for (const b of entry.querySelectorAll('.ipv__bird')) b.innerHTML = logoHTML();
-    for (const l of entry.querySelectorAll('.ipv__logo')) l.innerHTML = $('#goHome').innerHTML;
     insideSnap = null;
-    entry.hidden = false;
+    entry.show();
   }
   function setInside(scenario) {
     insideAsk = false;
     smeConfirm.hidden = true;
-    for (const sec of Object.values(ENTRIES)) sec.hidden = true;
+    for (const e of Object.values(ENTRIES)) e.hide();
     insideSnap = null;
     entry = ENTRIES[scenario] ?? null;
     if (entry) showInside();
@@ -3692,9 +3720,9 @@
     showInside();
   }
 
-  for (const sec of Object.values(ENTRIES)) {
-    sec.querySelector('.ins-pv, .ins-setup').addEventListener('click', () => {
-      sec.hidden = true;
+  for (const e of Object.values(ENTRIES)) {
+    e.trigger.addEventListener('click', () => {
+      e.hide();
       resetHistory(); // отмена в редакторе — только в пределах этого захода
       insideSnap = snapshot();
     });

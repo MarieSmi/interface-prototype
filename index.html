@@ -43,7 +43,7 @@
               <button class="tb-btn is-active" type="button" role="radio" data-align="stretch" aria-label="Растянуть" aria-checked="true"><span class="ico">&#xE6C2;</span></button>
             </div>
             <div class="pill-group pill-group--r12">
-              <!-- Десктоп / мобилка: мобильный вид — только в «Общем демо» -->
+              <!-- Десктоп / мобилка: мобильный вид — во всех сценариях (в точках захода — в конструкторе) -->
               <button class="tb-btn is-active" type="button" id="devDesktop" aria-label="Десктоп"><span class="ico">&#xE730;</span></button>
               <button class="tb-btn" type="button" id="devMobile" aria-label="Мобильная версия"><span class="ico">&#xE637;</span></button>
               <button class="tb-btn" type="button"><span class="ico">&#xEAB4;</span></button>
@@ -330,8 +330,8 @@
           <div class="informers">
             <div class="informers__top">
               <span class="informers__fio">СС<img src="assets/img/cu/fio-dot.svg" width="5.058" height="5.058" alt=""></span>
-              <span class="informers__btn"><span class="ico">&#xE747;</span></span>
-              <!-- «Общее демо» и сценарий «Плюс в тулбаре»: плюс вместо кнопки выше (Figma 16065:104154; кнопка pale 24 — nuC4KFMiS36uDWDUp9wKGl 17890:4318), открывает меню «+ вкладка» -->
+              <button class="informers__btn" type="button" id="infApps" aria-label="Настроить интерфейс"><span class="ico">&#xE747;</span><span class="click-pin" aria-hidden="true"><img src="assets/img/click-cursor.svg" width="16" height="16" alt=""></span></button>
+              <!-- Все сценарии конструктора и «Плюс в тулбаре»: плюс вместо кнопки выше (Figma 16065:104154; кнопка pale 24 — nuC4KFMiS36uDWDUp9wKGl 17890:4318), открывает меню «+ вкладка» -->
               <button class="inf-plus" type="button" id="infPlus" aria-label="Добавить вкладку"><span class="ico">&#xEB25;</span></button>
               <!-- сценарий «+вкладка в тулбаре»: та же ссылка, что в шапке дашборда, вертикально под кнопкой; открывает меню «+ вкладка» -->
               <button class="pg-link inf-link" type="button" id="infAddTab"><span class="ico">&#xEB25;</span><span class="pg-link__text">вкладка</span></button>
@@ -427,7 +427,7 @@
           </div>
         </div>
 
-        <!-- Мобильный вид (кнопка «мобилка» в шапке, только «Общее демо»; Figma xMQ3ZEN4AUINgwjVoxR8hS 18851:22733, скелетон 18871:38216):
+        <!-- Мобильный вид (кнопка «мобилка» в шапке; Figma xMQ3ZEN4AUINgwjVoxR8hS 18851:22733, скелетон 18871:38216):
              экран 400 по центру, страница — картинка, внизу ННП (18867:31160), по «Меню» — аккордеон поверх (AccordeonMobile 18867:32583) -->
         <div class="mob" id="mob" hidden>
           <div class="mob__screen">
@@ -552,7 +552,7 @@
       <section class="rp-win" id="rp-settings" hidden aria-label="Настройки">
         <div class="rp-win__head"><span class="rp-win__title">Настройки</span></div>
         <div class="rp-cards">
-          <div class="rp-card">
+          <div class="rp-card rp-card--informers">
             <div class="rp-prop"><span class="rp-prop__label rp-prop__label--82">Информеры</span><button class="rp-switch is-on" type="button" id="rpInformers" role="switch" aria-checked="true" aria-label="Информеры"></button></div>
           </div>
           <div class="rp-card">
@@ -1051,56 +1051,50 @@
       </div>
 
       <!-- Сценарий «Админка (Inside)» (Figma xMQ3ZEN4AUINgwjVoxR8hS 18428:12935): экран 1600×843 поверх конструктора.
-           Весь экран — картинка, живое только превью настроенного интерфейса (цвета и фон — токены темы со сцены):
-           по наведению — затенение и «Настроить ›» (Figma 18431:19444), клик открывает конструктор. -->
+           Фон — картинка (меню saby inside, список, колонка справа); поверх свёрстана панель «Online» по Figma 19470:56425:
+           мастер-список (только ховер), раздел «Оформление» — «Настроить ›» открывает конструктор,
+           превью 700×350 — цвета и фон токенами темы со сцены. -->
       <section class="ins" id="inside" hidden aria-label="Админка">
         <div class="ins__screen">
           <img class="ins__bg" src="assets/img/inside/screen.png" width="1600" height="843" alt="">
-          <button class="ins-pv" type="button" aria-label="Настроить">
-            <div class="ipv">
-              <div class="ipv__acc">
-                <div class="ipv__head"><span class="ipv__bird"></span><span class="ipv__logo"></span></div>
-                <div class="ipv__item"><i></i><b></b></div>
-                <div class="ipv__item is-sel"><i></i><b></b></div>
-                <div class="ipv__item"><i></i><b></b></div>
-                <div class="ipv__item"><i></i><b></b></div>
-                <div class="ipv__item"><i></i><b></b></div>
-              </div>
-              <div class="ipv__dash">
-                <div class="ipv__page">
-                  <div class="ipv__row1"><i class="ipv__a1"></i><i class="ipv__search"></i></div>
-                  <div class="ipv__tabs"><span class="ipv__tab"><i></i><i class="ipv__dot"></i></span><span class="ipv__tab"><i></i></span><span class="ipv__tab ipv__tab--on"><i></i><i class="ipv__under"></i></span></div>
-                  <div class="ipv__card">
-                    <div class="ipv__line"><i class="ipv__sq"></i><span><span><i style="width:24.466px"></i><i style="width:17.192px"></i></span><i style="width:95.218px"></i><i style="width:57.528px"></i></span></div>
-                    <i class="ipv__sep"></i>
-                    <div class="ipv__line"><i class="ipv__sq"></i><span><span><i style="width:24.466px"></i><i style="width:17.192px"></i></span><i style="width:95.218px"></i><i style="width:57.528px"></i></span></div>
-                    <i class="ipv__sep"></i>
-                    <div class="ipv__line"><i class="ipv__sq"></i><span><span><i style="width:24.466px"></i><i style="width:17.192px"></i></span><i style="width:95.218px"></i><i style="width:57.528px"></i></span></div>
-                  </div>
-                </div>
-                <div class="ipv__rp"><span><i></i><i></i></span><span><i class="ipv__shop"></i><i></i><i></i><i class="ipv__lav"></i></span></div>
-              </div>
-              <div class="ipv__cu">
-                <div class="ipv__note"><i class="ipv__cap"></i><i class="ipv__blk"></i></div>
-                <div class="ipv__note"><i class="ipv__cap"></i><span class="ipv__sqs"><i></i><i></i><i></i></span></div>
-                <div class="ipv__note"><i class="ipv__cap"></i><i class="ipv__blk"></i></div>
-                <div class="ipv__note ipv__note--news"><i class="ipv__pic"></i><span><i></i><i></i><i class="ipv__end"></i></span></div>
-              </div>
+          <div class="adm">
+            <div class="adm__head">
+              <span class="adm__logo"><img src="assets/img/inside/online-logo.svg" width="40" height="40" alt=""></span>
+              <span class="adm__title">Online</span>
+              <span class="adm__ver">26.4234</span>
+              <span class="adm__pub">Опубликовано для всех</span>
+              <span class="adm__save">Сохранить</span>
             </div>
-            <span class="ins-pv__hover"><span class="ins-pv__btn">Настроить<span class="ico">&#xE9AB;</span></span></span>
-          </button>
-        </div>
-      </section>
-
-      <!-- Сценарий «Аккаунт» (Figma xMQ3ZEN4AUINgwjVoxR8hS 18637:73187): экран 1600×843 — картинка, середина (превью 620×350,
-           текст, «Настроить», карточки) живая — превью красится токенами темы, как в админке -->
-      <section class="ins" id="account" hidden aria-label="Аккаунт">
-        <div class="ins__screen">
-          <img class="ins__bg ins__bg--acc" src="assets/img/account/bg.png" width="1600" height="843" alt="">
-          <div class="ins-main ins-main--acc">
-            <div class="ins-top">
-              <!-- Превью 470×250 (Figma 18659:78067): аккордеон, страница, ЦУ -->
-              <div class="ipv">
+            <ul class="adm-ml">
+              <li class="adm-ml__item">Настройка</li>
+              <li class="adm-ml__item is-sel">Оформление</li>
+              <li class="adm-ml__item adm-ml__item--sub">Приветствие<i class="adm-sw is-on"></i></li>
+              <li class="adm-ml__item">Авторизация</li>
+              <li class="adm-ml__item">Домены</li>
+              <li class="adm-ml__item">Компоненты</li>
+              <li class="adm-ml__item">Контекст данных</li>
+              <li class="adm-ml__item">Тарифы</li>
+              <li class="adm-ml__item">Роли</li>
+              <li class="adm-ml__item">Оповещения</li>
+              <li class="adm-ml__item">Компаньоны</li>
+              <li class="adm-ml__item">Активность</li>
+              <li class="adm-ml__item">Конфигурации</li>
+              <li class="adm-ml__item">Манифест<i class="adm-sw"></i></li>
+            </ul>
+            <div class="adm__main">
+              <div class="adm-intro">
+                <p class="adm-intro__title">Настройка интерфейса Saby</p>
+                <div class="adm-intro__tags">
+                  <span><i class="ico">&#xE9E2;</i>Логотип</span>
+                  <span><i class="ico">&#xEBBA;</i>Компоновка</span>
+                  <span><i class="ico">&#xEBBB;</i>Оформление</span>
+                  <span class="adm-intro__g8"><i class="ico">&#xEBBE;</i>Меню</span>
+                  <span class="adm-intro__g8"><i class="ico">&#xEBA0;</i>Язык</span>
+                </div>
+                <button class="ins-setup" type="button">Настроить<span class="ico">&#xE9AB;</span></button>
+              </div>
+              <!-- Превью (Figma 19470:56532) — то же превью, что в «Аккаунте», 700×350 без масштаба -->
+              <div class="ipv ipv--700">
                 <div class="ipv__acc">
                   <div class="ipv__head"><span class="ipv__bird"></span><span class="ipv__logo"></span></div>
                   <div class="ipv__item"><i></i><b></b></div>
@@ -1130,20 +1124,124 @@
                   <div class="ipv__note ipv__note--news"><i class="ipv__pic"></i><span><i></i><i></i><i class="ipv__end"></i></span></div>
                 </div>
               </div>
-              <div class="ins-intro">
-                <div class="ins-intro__text">
-                  <p class="ins-intro__title">Настройте интерфейс Saby</p>
-                  <p class="ins-intro__sub">Выберите готовую тему или настройте внешний вид и расположение элементов интерфейса под свои задачи.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Сценарий «Аккаунт» (Figma xMQ3ZEN4AUINgwjVoxR8hS 19523:72338): экран 1600×843 — картинка; середина живая —
+           как в админке: «Настройка интерфейса Saby», строка разделов, «Настроить ›» (открывает конструктор) и превью 700×350 -->
+      <section class="ins" id="account" hidden aria-label="Аккаунт">
+        <div class="ins__screen">
+          <img class="ins__bg ins__bg--acc" src="assets/img/account/bg.png" width="1600" height="843" alt="">
+          <i class="ins-acc-reset"></i><!-- «Сбросить настройки аккаунта» в макете скрыта — закрыта подложкой -->
+          <div class="ins-main ins-main--acc">
+            <div class="adm-intro">
+              <p class="adm-intro__title">Настройка интерфейса Saby</p>
+              <div class="adm-intro__tags">
+                <span><i class="ico">&#xE9E2;</i>Логотип</span>
+                <span><i class="ico">&#xEBBA;</i>Компоновка</span>
+                <span><i class="ico">&#xEBBB;</i>Оформление</span>
+                <span class="adm-intro__g8"><i class="ico">&#xEBBE;</i>Меню</span>
+                <span class="adm-intro__g8"><i class="ico">&#xEBA0;</i>Язык</span>
+              </div>
+              <button class="ins-setup" type="button">Настроить<span class="ico">&#xE9AB;</span></button>
+            </div>
+            <div class="ipv ipv--700">
+              <div class="ipv__acc">
+                <div class="ipv__head"><span class="ipv__bird"></span><span class="ipv__logo"></span></div>
+                <div class="ipv__item"><i></i><b></b></div>
+                <div class="ipv__item is-sel"><i></i><b></b></div>
+                <div class="ipv__item"><i></i><b></b></div>
+                <div class="ipv__item"><i></i><b></b></div>
+                <div class="ipv__item"><i></i><b></b></div>
+              </div>
+              <div class="ipv__dash">
+                <div class="ipv__page">
+                  <div class="ipv__row1"><i class="ipv__a1"></i><i class="ipv__search"></i></div>
+                  <div class="ipv__tabs"><span class="ipv__tab"><i></i><i class="ipv__dot"></i></span><span class="ipv__tab"><i></i></span><span class="ipv__tab ipv__tab--on"><i></i><i class="ipv__under"></i></span></div>
+                  <div class="ipv__card">
+                    <div class="ipv__line"><i class="ipv__sq"></i><span><span><i style="width:24.466px"></i><i style="width:17.192px"></i></span><i style="width:95.218px"></i><i style="width:57.528px"></i></span></div>
+                    <i class="ipv__sep"></i>
+                    <div class="ipv__line"><i class="ipv__sq"></i><span><span><i style="width:24.466px"></i><i style="width:17.192px"></i></span><i style="width:95.218px"></i><i style="width:57.528px"></i></span></div>
+                    <i class="ipv__sep"></i>
+                    <div class="ipv__line"><i class="ipv__sq"></i><span><span><i style="width:24.466px"></i><i style="width:17.192px"></i></span><i style="width:95.218px"></i><i style="width:57.528px"></i></span></div>
+                  </div>
+                </div>
+                <div class="ipv__rp"><span><i></i><i></i></span><span><i class="ipv__shop"></i><i></i><i></i><i class="ipv__lav"></i></span></div>
+              </div>
+              <div class="ipv__cu">
+                <div class="ipv__note"><i class="ipv__cap"></i><i class="ipv__blk"></i></div>
+                <div class="ipv__note"><i class="ipv__cap"></i><span class="ipv__sqs"><i></i><i></i><i></i></span></div>
+                <div class="ipv__note"><i class="ipv__cap"></i><i class="ipv__blk"></i></div>
+                <div class="ipv__note ipv__note--news"><i class="ipv__pic"></i><span><i></i><i></i><i class="ipv__end"></i></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Сценарий «Пользователь → Из настроек» (Figma xMQ3ZEN4AUINgwjVoxR8hS 19523:73629): экран 1600×843 — картинка (аккордеон,
+           информеры, ЦУ); середина живая: мастер-список настроек (только ховер), «Интерфейс» — как в админке, кликается только «Настроить ›» -->
+      <section class="ins" id="userSettings" hidden aria-label="Пользователь — настройки">
+        <div class="ins__screen">
+          <img class="ins__bg ins__bg--user" src="assets/img/user/settings.png" width="1602" height="845" alt="">
+          <div class="usr">
+            <ul class="adm-ml adm-ml--usr">
+              <li class="adm-ml__item">Доступ и роли</li>
+              <li class="adm-ml__item is-sel">Интерфейс</li>
+              <li class="adm-ml__item">Уведомления</li>
+              <li class="adm-ml__item">Рабочее место</li>
+              <li class="adm-ml__item">Устройства</li>
+              <li class="adm-ml__item">Действия</li>
+              <li class="adm-ml__item">Бизнес-процессы</li>
+              <li class="adm-ml__item">Проходная</li>
+              <li class="adm-ml__item">Подписи</li>
+              <li class="adm-ml__item">Десктопные приложения</li>
+              <li class="adm-ml__item">Приветствие<i class="adm-sw"></i></li>
+            </ul>
+            <div class="usr__main">
+              <div class="adm-intro">
+                <p class="adm-intro__title">Настройка интерфейса Saby</p>
+                <div class="adm-intro__tags">
+                  <span><i class="ico">&#xE9E2;</i>Логотип</span>
+                  <span><i class="ico">&#xEBBA;</i>Компоновка</span>
+                  <span><i class="ico">&#xEBBB;</i>Оформление</span>
+                  <span class="adm-intro__g8"><i class="ico">&#xEBBE;</i>Меню</span>
+                  <span class="adm-intro__g8"><i class="ico">&#xEBA0;</i>Язык</span>
                 </div>
                 <button class="ins-setup" type="button">Настроить<span class="ico">&#xE9AB;</span></button>
               </div>
-            </div>
-            <div class="ins-info">
-              <div class="ins-info__item"><span class="ins-info__ico">&#xEBBB;</span><p class="ins-info__title">Оформление</p><p class="ins-info__sub">Настройте логотип, тему и фон приложения</p></div>
-              <i class="ins-info__sep"></i>
-              <div class="ins-info__item"><span class="ins-info__ico">&#xEBBA;</span><p class="ins-info__title">Компоновка</p><p class="ins-info__sub">Настройте меню, центр уведомлений и расположение страницы</p></div>
-              <i class="ins-info__sep"></i>
-              <div class="ins-info__item"><span class="ins-info__ico">&#xEBA0;</span><p class="ins-info__title">Язык</p><p class="ins-info__sub">Выберите язык интерфейса</p></div>
+              <div class="ipv ipv--700">
+                <div class="ipv__acc">
+                  <div class="ipv__head"><span class="ipv__bird"></span><span class="ipv__logo"></span></div>
+                  <div class="ipv__item"><i></i><b></b></div>
+                  <div class="ipv__item is-sel"><i></i><b></b></div>
+                  <div class="ipv__item"><i></i><b></b></div>
+                  <div class="ipv__item"><i></i><b></b></div>
+                  <div class="ipv__item"><i></i><b></b></div>
+                </div>
+                <div class="ipv__dash">
+                  <div class="ipv__page">
+                    <div class="ipv__row1"><i class="ipv__a1"></i><i class="ipv__search"></i></div>
+                    <div class="ipv__tabs"><span class="ipv__tab"><i></i><i class="ipv__dot"></i></span><span class="ipv__tab"><i></i></span><span class="ipv__tab ipv__tab--on"><i></i><i class="ipv__under"></i></span></div>
+                    <div class="ipv__card">
+                      <div class="ipv__line"><i class="ipv__sq"></i><span><span><i style="width:24.466px"></i><i style="width:17.192px"></i></span><i style="width:95.218px"></i><i style="width:57.528px"></i></span></div>
+                      <i class="ipv__sep"></i>
+                      <div class="ipv__line"><i class="ipv__sq"></i><span><span><i style="width:24.466px"></i><i style="width:17.192px"></i></span><i style="width:95.218px"></i><i style="width:57.528px"></i></span></div>
+                      <i class="ipv__sep"></i>
+                      <div class="ipv__line"><i class="ipv__sq"></i><span><span><i style="width:24.466px"></i><i style="width:17.192px"></i></span><i style="width:95.218px"></i><i style="width:57.528px"></i></span></div>
+                    </div>
+                  </div>
+                  <div class="ipv__rp"><span><i></i><i></i></span><span><i class="ipv__shop"></i><i></i><i></i><i class="ipv__lav"></i></span></div>
+                </div>
+                <div class="ipv__cu">
+                  <div class="ipv__note"><i class="ipv__cap"></i><i class="ipv__blk"></i></div>
+                  <div class="ipv__note"><i class="ipv__cap"></i><span class="ipv__sqs"><i></i><i></i><i></i></span></div>
+                  <div class="ipv__note"><i class="ipv__cap"></i><i class="ipv__blk"></i></div>
+                  <div class="ipv__note ipv__note--news"><i class="ipv__pic"></i><span><i></i><i></i><i class="ipv__end"></i></span></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
