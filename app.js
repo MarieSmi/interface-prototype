@@ -139,7 +139,7 @@
   // Рамка демо — модуль demo-frame (github.com/MarieSmi/demo-frame): шапка, сцена 1600×900 и вспомогательная панель
   // справа масштабируются как одно целое. Выбранный сценарий — в data-scenario у сцены, подсценарий вилки — в data-variant.
   let scale = 1;
-  DemoFrame.mount({
+  const frame = DemoFrame.mount({
     stage,
     head: {
       title: 'Настройка интерфейса в конструкторе', version: '27.1100',
@@ -3128,8 +3128,11 @@
   function pvStyle(t, e = effColors(t, {})) {
     const v = { ...themeVars(t, e) };
     const p = e.pv ?? t.pv;
+    // фон-картинка: под страницей забеление 70%, как на сцене; аккордеон без цвета или белый 70% лежит на том же забелении
+    const img = /^url\(/.test(e.pvBg ?? '');
+    const veilAcc = img && (v['--acc-bg'] === 'transparent' || v['--acc-bg'] === 'rgba(255, 255, 255, 0.7)');
     const pv = {
-      bg: e.pvBg ?? v['--content-bg'], acc: v['--acc-bg'], sel: p.sel ?? v['--acc-item-selected'] ?? '#273748',
+      bg: e.pvBg ?? v['--content-bg'], veil: img ? 'rgba(255, 255, 255, .7)' : 'transparent', acc: veilAcc ? 'transparent' : v['--acc-bg'], sel: p.sel ?? v['--acc-item-selected'] ?? '#273748',
       bird: v['--acc-bird'] ?? e.marker, 'bird-bg': v['--acc-bird-bg'] ?? 'transparent',
       title: p.title, line: p.line, icon: p.icon, 'icon-sel': p.iconSel, marker: e.marker, accent2: e.accent2,
       card: p.card ?? '#fff', box: p.box ?? '#f4f4f4', top: p.top ?? '#fff',
@@ -3140,7 +3143,7 @@
   // Превью 306×181: аккордеон (птичка, название, пункт, выбранный пункт с маркером) и страница (вкладка, карточка).
   function pvHTML(t, e) {
     return `<span class="tpv" style="${pvStyle(t, e)}">` +
-      '<i class="tpv__acc"></i><i class="tpv__bird">&#xE9E2;</i><i class="tpv__title"></i>' +
+      '<i class="tpv__veil"></i><i class="tpv__acc"></i><i class="tpv__bird">&#xE9E2;</i><i class="tpv__title"></i>' +
       '<i class="tpv__dot" style="top:46px"></i><i class="tpv__line" style="top:54px;width:60px"></i>' +
       '<i class="tpv__sel"></i><i class="tpv__mark"></i><i class="tpv__dot" style="top:79px;background:var(--pv-icon-sel)"></i>' +
       '<i class="tpv__line" style="top:87px;width:34px"></i><i class="tpv__line tpv__a2" style="top:87px;left:84px;width:10px"></i><i class="tpv__line tpv__a1" style="top:87px;left:98px;width:10px"></i>' +
@@ -3408,8 +3411,12 @@
     sw.className = 'swatch' + (img ? ' is-img' : b.kind === 'color' && b.a < 100 ? ' is-alpha' : '');
     sw.style.setProperty('--c', img ? `url(${BG_IMGS[b.i]})` : custom.bg ? bgPreview(b) : t.bg ?? DEFAULT_BG);
     stage.classList.toggle('is-bg-img', img);
-    // аккордеон белый 70%, как задаёт картинка (не перекрашен), — его забеление входит в общий слой под контентом (styles.css)
-    stage.classList.toggle('is-acc-veil', img && custom.acc?.hex === '#ffffff' && custom.acc.a === 70);
+    // аккордеон белый 70%, как задаёт картинка (не перекрашен), — его забеление входит в общий слой под контентом (styles.css).
+    // Аккордеон без цвета лежит на том же забелении, что и контент: картинка под ним тоже под белым 70%.
+    const acc = custom.acc ?? baseColor(t.acc);
+    const clear = !acc.hex || acc.a === 0;
+    stage.classList.toggle('is-acc-veil', img && (clear || (acc.hex === '#ffffff' && acc.a === 70)));
+    stage.classList.toggle('is-acc-clear', img && clear);
     if (!img) { for (const p of ['--bg-img', '--bg-op', '--bg-filter', '--bg-tint']) stage.style.removeProperty(p); return; }
     const f = b.fx;
     // температура: тёплый или холодный оттенок поверх картинки (soft-light)
@@ -3729,6 +3736,8 @@
     });
   }
   $('.ctor-header .done-btn').addEventListener('click', () => {
+    // «Общее демо»: ✓ сохраняет настройки и уводит на сценарий захода из админки
+    if (stage.dataset.scenario === 'demo') { frame.select('editor-inside'); return; }
     if (insideSnap === null) return;
     record();
     resetHistory();

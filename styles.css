@@ -1574,6 +1574,7 @@ button.sm-head:hover .sm-head__title { background: var(--submenu-item-hover); }
 /* превью темы 306×181 (большое; в плашках уменьшено). Цвета — переменные --pv-* на .tpv */
 .tpv { position: relative; display: block; width: 306px; height: 181.333px; overflow: hidden; background: var(--pv-bg); }
 .tpv > i { position: absolute; display: block; }
+.tpv__veil { inset: 0; background: var(--pv-veil); }
 .tpv__acc { left: 0; top: 0; width: 128px; height: 100%; background: var(--pv-acc); }
 .tpv__bird { left: 13px; top: 11px; width: 22px; height: 22px; border-radius: 50%; background: var(--pv-bird-bg); font: normal 22px/22px "cbuc-icons24"; color: var(--pv-bird); text-align: center; }
 .tpv__title { left: 46px; top: 19px; width: 52px; height: 7px; border-radius: 4px; background: var(--pv-title); }
@@ -1761,6 +1762,8 @@ button.sm-head:hover .sm-head__title { background: var(--submenu-item-hover); }
 .stage.is-bg-img.is-acc-veil .content::after { left: calc(1px + var(--align-shift)); width: calc(var(--acc-gap) + var(--mid) + 321px); }
 /* аккордеон лежит на общем забелении; раскрытая по ховеру панель — поверх середины, ей нужна своя подложка */
 .stage.is-bg-img.is-acc-veil .accordion:not(.is-panel-open) { background: none; }
+/* аккордеон без цвета: раскрытой панели над серединой нужна своя подложка — забеление 70% с размытием контента под ней */
+.stage.is-bg-img.is-acc-clear .accordion.is-panel-open { background: rgba(255, 255, 255, .7); backdrop-filter: blur(20px); }
 
 /* ---------- Сценарий «Админка (Inside)» (Figma xMQ3ZEN4AUINgwjVoxR8hS 18428:12935) ----------
    Экран 1600×843 поверх конструктора; ниже — полоса подложки. Экран — картинка, поверх свёрстана живая часть (у админки — панель «Online»). */
