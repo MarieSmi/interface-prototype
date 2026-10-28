@@ -136,7 +136,7 @@
   const pageMain = $('#pageMain');
   const pageSkeleton = $('#pageSkeleton');
 
-  // Рамка демо — модуль demo-frame (github.com/MarieSmi/demo-frame): шапка, сцена 1600×900 и вспомогательная панель
+  // Рамка демо — модуль demo-frame (github.com/MarieSmi/ui-kit): шапка, сцена 1600×900 и вспомогательная панель
   // справа масштабируются как одно целое. Выбранный сценарий — в data-scenario у сцены, подсценарий вилки — в data-variant.
   let scale = 1;
   const frame = DemoFrame.mount({

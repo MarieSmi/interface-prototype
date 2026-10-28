@@ -9,7 +9,7 @@
 
 - Демо (GitHub Pages): https://mariesmi.github.io/interface-prototype/
 - Репозиторий (публичный): https://github.com/MarieSmi/interface-prototype
-- Шапка демо и вспомогательная панель — отдельный модуль https://github.com/MarieSmi/demo-frame (подключён с jsDelivr по тегу, `index.html`)
+- Шапка демо и вспомогательная панель — модуль demo-frame из https://github.com/MarieSmi/ui-kit вместе с токенами (подключён с jsDelivr по тегу, `index.html`)
 
 ## Публикация
 
@@ -50,7 +50,7 @@
 | Ховеры и выделение виджетов в редакторе | `xMQ3ZEN4AUINgwjVoxR8hS` | `19237-33075` |
 | Плюсы на рамке виджета | `rHabzni5OI5D4fxBLQdj2m` | `399-49380` |
 | Пунктир родителя выделенного виджета | `rHabzni5OI5D4fxBLQdj2m` | `3279-4851` |
-| Вспомогательная панель справа (сценарии, ссылки) — модуль [demo-frame](https://github.com/MarieSmi/demo-frame), сценарии — конфиг в `app.js` | `xMQ3ZEN4AUINgwjVoxR8hS` | `18715-93398` |
+| Вспомогательная панель справа (сценарии, ссылки) — модуль [demo-frame](https://github.com/MarieSmi/ui-kit/tree/main/components/demo-frame) из ui-kit, сценарии — конфиг в `app.js` | `xMQ3ZEN4AUINgwjVoxR8hS` | `18715-93398` |
 | Тулбар выделенного виджета | `rHabzni5OI5D4fxBLQdj2m` | `131-17364` |
 | Меню «+» редактора подменю | `9eLwMJLQCwT0xHKviN2j1P` | `16090-257796` |
 | Выбор иконки раздела | `44fX18O5Huk4hmoaANMNIC` | `10506-57779` |
