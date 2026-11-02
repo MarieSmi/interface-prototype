@@ -845,9 +845,9 @@ ul { list-style: none; margin: 0; padding: 0; }
 .rp-cat__name { flex: 1; min-width: 0; font-size: 15px; letter-spacing: -.2115px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .rp-cat.is-selected .rp-cat__name { font-weight: 600; }
 .rp-cat__count { flex: none; font-size: 14px; letter-spacing: -.1974px; color: #8991a9; }
-/* превью из макета обрезано на 726px — виджет «Отчеты» (Figma 19259:36760) кладём отдельной картинкой с 700px; низ обрезает окно */
-.rp-shop__pv { flex: none; position: relative; align-self: flex-start; height: 961px; }
-.rp-shop__reports { position: absolute; left: 12px; top: 700px; width: 326px; height: 261px; display: flex; flex-direction: column; background: #f8f8f8; box-shadow: 0 0 0 12px #f8f8f8; }
+/* превью из макета обрезано на 633px — виджет «Отчеты» (Figma 19259:36760) кладём отдельной картинкой с 607px; низ обрезает окно */
+.rp-shop__pv { flex: none; position: relative; align-self: flex-start; height: 868px; }
+.rp-shop__reports { position: absolute; left: 12px; top: 607px; width: 326px; height: 261px; display: flex; flex-direction: column; background: #f8f8f8; box-shadow: 0 0 0 12px #f8f8f8; }
 .rp-sw__title { font-size: 14px; letter-spacing: -.1974px; line-height: 17px; }
 .rp-sw__desc { margin-top: 4px; font-size: 12px; letter-spacing: -.1692px; line-height: 15px; color: #999; }
 .rp-sw__pv { position: relative; margin-top: 8px; height: 202px; overflow: hidden; border: 1px solid rgba(0, 0, 0, .05); border-radius: 8px; background: #ecebe9; }
@@ -856,8 +856,6 @@ ul { list-style: none; margin: 0; padding: 0; }
    рамка #7b62f8 40%, у больших превью ещё «+» по центру */
 .rp-wz { position: absolute; border: 1px solid transparent; border-radius: 8px; cursor: default; }
 .rp-wz:hover { border-color: rgba(123, 98, 248, .4); }
-/* «Вкладки» добавляются кликом, пока виджета нет на странице */
-.stage:not(.tabs-added) .rp-wz[data-act="tabs"] { cursor: pointer; }
 .rp-wz__plus { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 36px; height: 36px; padding-bottom: 1px; border-radius: 18px; background: #eeebff; color: #5a49ab; display: none; }
 .rp-wz:hover .rp-wz__plus { display: flex; }
 .rp-shop__preview { display: block; }

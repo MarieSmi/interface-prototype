@@ -1023,7 +1023,7 @@
 
   // «Магазин»: список категорий (статика с ховером). open — раскрытый раздел, closed — свёрнутый, child — подраздел.
   const SHOP_CATS = [
-    ['Все', 240, 'selected'], ['Секции', 4], ['Навигация', 1], ['Продажи', 32, 'open'],
+    ['Все', 239, 'selected'], ['Секции', 4], ['Продажи', 32, 'open'],
     ['Каталог и цены', 7, 'child'], ['Розница', 10, 'child'], ['Presto', 2, 'child'], ['Saby Clients', 1, 'child'], ['Документы продаж', 6, 'child'],
     ['Отчетность', 7, 'closed'], ['Базовые возможности', 9, 'closed'], ['Документооборот', 5, 'closed'], ['Управление персоналом', 26, 'closed'],
     ['Бухгалтерия и зарплата', 40, 'closed'], ['Деньги', 5], ['Торги', 13], ['Компании', 9], ['Маркетинг', 6],
@@ -1035,22 +1035,14 @@
     `<div class="rp-cat${kind === 'child' ? ' rp-cat--child' : ''}${kind === 'selected' ? ' is-selected' : ''}">` +
     `<span class="ico rp-cat__arrow">${ARROWS[kind] ?? ''}</span><span class="rp-cat__name">${name}</span><span class="rp-cat__count">${count}</span></div>`).join('');
 
-  // Карточки на картинке превью (координаты из макета 16041:48565): [x, y, ширина, высота, большая — с «+», действие].
+  // Карточки на картинке превью (координаты из макета 16041:48565, полоса виджета «Вкладки» вырезана): [x, y, ширина, высота, большая — с «+»].
   const SHOP_WIDGETS = [
     [12, 35, 75.5, 32], [95.5, 35, 75.5, 32], [179, 35, 75.5, 32], [262.5, 35, 75.5, 32], // секции
-    [12, 108, 326, 52, true, 'tabs'], // вкладки
-    [12, 247, 326, 50, true], [12, 372, 326, 202, true], [12, 634, 326, 50, true], // наценка, номенклатура, остаток
-    [12, 759, 326, 202, true], // отчеты
+    [12, 154, 326, 50, true], [12, 279, 326, 202, true], [12, 541, 326, 50, true], // наценка, номенклатура, остаток
+    [12, 666, 326, 202, true], // отчеты
   ];
-  $('#rpShopPv').insertAdjacentHTML('beforeend', SHOP_WIDGETS.map(([x, y, w, h, big, act]) =>
-    `<div class="rp-wz"${act ? ` data-act="${act}"` : ''} style="left:${x}px;top:${y}px;width:${w}px;height:${h}px">${big ? '<span class="ico24 rp-wz__plus">&#xEAE9;</span>' : ''}</div>`).join(''));
-  // Сценарий «Из магазина» (Figma 18797:65742): клик по «Вкладкам» закрывает магазин, виджет вкладок встаёт на своё место
-  // с новой пустой вкладкой (addBlankTab). Пока виджет на странице, второй не добавляется.
-  $('#rpShopPv').addEventListener('click', (e) => {
-    if (!e.target.closest('.rp-wz[data-act="tabs"]') || stage.classList.contains('tabs-added')) return;
-    closeRp();
-    addBlankTab();
-  });
+  $('#rpShopPv').insertAdjacentHTML('beforeend', SHOP_WIDGETS.map(([x, y, w, h, big]) =>
+    `<div class="rp-wz" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px">${big ? '<span class="ico24 rp-wz__plus">&#xEAE9;</span>' : ''}</div>`).join(''));
 
   // «Настройки»: переключатель «Информеры» и выпадающие списки «На странице / В окне».
   // Выключенные «Информеры» прячут кнопки телефона и чата в колонке информеров (styles.css, .no-informers).
