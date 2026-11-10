@@ -69,7 +69,7 @@
       <nav class="accordion" id="accordion" aria-label="Навигация приложения">
         <div class="acc-header">
           <div class="acc-header__row" data-tip="На главную">
-            <button class="acc-bird" type="button" aria-label="Логотип" data-tip=""><span class="ico24">&#xE9E2;</span></button>
+            <span class="acc-bird"><span class="ico24">&#xE9E2;</span></span>
             <button class="acc-logo" type="button" id="goHome" aria-label="saby"><svg class="acc-logo__svg" width="48.2" height="23.82" viewBox="0 0 48.2 23.82" aria-hidden="true"><path fill="currentColor" d="M0.720 14.200C1.040 16.580 3.260 18.120 6.360 18.120C9.300 18.120 11.220 16.880 11.220 15C11.220 13.120 9.900 12.260 6.160 11.700C3.460 11.300 2.700 10.920 2.700 9.960C2.700 8.980 3.880 8.320 5.620 8.320C7.440 8.320 8.800 9.220 9.200 10.660L10.720 10.360C10.360 8.400 8.160 6.920 5.620 6.920C2.920 6.920 1.120 8.180 1.120 10.020C1.120 11.780 2.360 12.600 6.120 13.120C8.680 13.460 9.620 13.980 9.620 15.020C9.620 16.080 8.380 16.720 6.360 16.720C3.980 16.720 2.580 15.720 2.240 13.860L0.720 14.200ZM12.860 14.980C12.860 16.920 14.320 18.120 16.780 18.120C18.460 18.120 20 17.460 20.720 16.480L20.760 16.480L20.760 17.820L22.340 17.820L22.340 10.380C22.340 8.280 20.620 6.920 17.920 6.920C16.580 6.920 15.460 7.260 14.560 7.920C13.660 8.580 13.120 9.460 12.920 10.560L14.500 10.900C14.820 9.300 16.080 8.360 17.920 8.360C19.540 8.360 20.580 9.020 20.580 10.040C20.580 10.860 19.800 11.280 17.540 11.660C14.160 12.200 12.860 13.120 12.860 14.980ZM20.700 14.120C20.700 15.460 19 16.660 17.120 16.660C15.360 16.660 14.520 16.120 14.520 14.980C14.520 13.940 15.460 13.380 17.840 12.980C19.600 12.680 20.360 12.380 20.660 11.840L20.700 11.840ZM26.480 16.500C27.340 17.520 28.800 18.120 30.460 18.120C33.760 18.120 36.140 15.800 36.140 12.520C36.140 9.340 33.740 6.920 30.560 6.920C28.900 6.920 27.420 7.520 26.540 8.560L26.500 8.560L26.500 3.220L24.860 3.220L24.860 17.820L26.440 17.820L26.440 16.500ZM34.500 12.520C34.500 15.060 32.900 16.680 30.360 16.680C28.200 16.680 26.500 15.180 26.500 13.320L26.500 11.720C26.500 9.860 28.220 8.360 30.460 8.360C32.880 8.360 34.500 10 34.500 12.520ZM38.600 22.320L40.460 22.320L48.000 7.220L46.120 7.220L42.260 15.180L42.220 15.180L38.340 7.220L36.460 7.220L41.320 16.900Z"/></svg></button>
             <button class="acc-plus" type="button" aria-label="Добавить раздел" data-tip=""><span class="ico">&#xEB25;</span><span class="click-pin" aria-hidden="true"><img src="assets/img/click-cursor.svg" width="16" height="16" alt=""></span></button>
           </div>
@@ -595,6 +595,23 @@
           <button class="mw-menu__item acc-more__item" type="button" data-act="delete"><span class="ico24 acc-more__danger">&#xEB72;</span><span class="mw-menu__text">Удалить</span></button>
         </div>
         <button class="mw-menu__close" type="button" id="aeMoreClose" aria-label="Закрыть"><img src="assets/img/close-menu.svg" width="12" height="12" alt=""></button>
+      </div>
+      <!-- Меню «⋯» тулбара виджета в редакторе подменю — как у пункта в редакторе аккордеона: в 8 под тулбаром, иконки под «⋯».
+           Заголовок не перемещается; у пустой колонки — только «Удалить» -->
+      <div class="mw-menu acc-more ae-more" id="smeMore" hidden>
+        <div class="mw-menu__list">
+          <button class="mw-menu__item acc-more__item" type="button" data-act="replace"><span class="ico24 acc-more__ico16">&#xEBD1;</span><span class="mw-menu__text">Заменить</span></button>
+          <button class="mw-menu__item acc-more__item" type="button" data-act="settings"><span class="ico24">&#xE75D;</span><span class="mw-menu__text">Настроить</span></button>
+          <div class="mw-menu__item acc-more__item acc-more__move"><span class="ico24">&#xE63F;</span><span class="mw-menu__text">Переместить</span><span class="acc-more__arrow"><span class="ico">&#xE9AB;</span></span>
+            <div class="acc-more__sub">
+              <div class="mw-menu__item acc-more__item" data-act="up"><span class="ico24">&#xE672;</span><span class="mw-menu__text">Вверх</span></div>
+              <div class="mw-menu__item acc-more__item" data-act="down"><span class="ico24">&#xE673;</span><span class="mw-menu__text">Вниз</span></div>
+              <div class="mw-menu__item acc-more__item"><span class="ico24">&#xE63F;</span><span class="mw-menu__text">В другой раздел</span></div>
+            </div>
+          </div>
+          <button class="mw-menu__item acc-more__item" type="button" data-act="delete"><span class="ico24 acc-more__danger">&#xEB72;</span><span class="mw-menu__text">Удалить</span></button>
+        </div>
+        <button class="mw-menu__close" type="button" id="smeMoreClose" aria-label="Закрыть"><img src="assets/img/close-menu.svg" width="12" height="12" alt=""></button>
       </div>
       <!-- Меню «⋮» пункта аккордеона (Figma xMQ3ZEN4AUINgwjVoxR8hS 19401:31603): крестик — поверх «⋮»;
            «Переместить» — только ховер, по нему подменю «Вверх / Вниз / В другой раздел» (19404:32415) -->
