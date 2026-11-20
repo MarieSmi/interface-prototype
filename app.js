@@ -143,7 +143,7 @@
     stage,
     head: {
       title: 'Настройка интерфейса в конструкторе', version: '27.1100',
-      href: 'https://axure.tensor.ru/StandardsV8/guidelines.html', status: 'Запущено согласование 30.09.26',
+      href: 'https://axure.tensor.ru/StandardsV8/guidelines.html', status: 'Электронно согласовано 19.11.26',
     },
     devices: [
       { id: 'laptop', icon: 'laptop', label: 'Ноутбук', disabled: true }, // пока есть только монитор 1600×900
